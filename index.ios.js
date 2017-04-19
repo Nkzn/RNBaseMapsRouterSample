@@ -5,41 +5,25 @@
  */
 
 import React, { Component } from 'react';
-import {
-  AppRegistry,
-  StyleSheet,
-  Text,
-  View
-} from 'react-native';
-import MapView from 'react-native-maps'
+import { AppRegistry } from 'react-native';
+import { Scene, Router } from 'react-native-router-flux';
+
+import PageA from './src/components/pageA';
+import PageB from './src/components/pageB';
+import Login from './src/components/login';
 
 export default class RNBaseMapsRouterSample extends Component {
   render() {
     return (
-      <View style={styles.container}>
-        <MapView
-          style={styles.map}
-          region={{
-            latitude: 37.78825,
-            longitude: -122.4324,
-            latitudeDelta: 0.015,
-            longitudeDelta: 0.0121,
-          }}/>
-      </View>
+      <Router>
+        <Scene key="root">
+          <Scene key="login" component={Login} initial hideNavBar />
+          <Scene key="pageA" component={PageA} />
+          <Scene key="pageB" component={PageB} />
+        </Scene>
+      </Router>
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
-  map: {
-    ...StyleSheet.absoluteFillObject,
-  },
-});
 
 AppRegistry.registerComponent('RNBaseMapsRouterSample', () => RNBaseMapsRouterSample);
